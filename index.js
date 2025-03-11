@@ -24,6 +24,12 @@ app.get("/api/hello", function (res, req) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api", function(req, res) {
+  const now = new Date();
+  res.json({ unix: now.getTime(), utc: now.toUTCString() });
+});
+
+
 app.get("/api/:date", function(req, res) {
   let dateParam = req.params.date;
 
@@ -31,7 +37,7 @@ app.get("/api/:date", function(req, res) {
   if (/^\d+$/.test(dateParam)) {
     dateParam = parseInt(dateParam); // Convert to number
   }
-
+  
   const date = new Date(dateParam);
 
   // Handle invalid date
